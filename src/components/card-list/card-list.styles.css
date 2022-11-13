@@ -20,12 +20,13 @@
   background-color: #f8cf1f;
   border: 1px solid #dab513df;
   border-radius: 2px;
-  padding: 0.2rem;
+  padding: 0rem 0.2rem;
+  margin: 0rem 0.8rem;
   cursor:pointer;
 
   transform: rotate3d(1,0,0, 30deg);
   transition: 0.45s;
-  margin: 1rem;
+
   width:5.2vw;
   min-width: 5rem;
   /* border: 1px solid red; */
@@ -39,6 +40,6 @@
 }
 
 .card-container:hover {
-  transform: scale(1.1) translateY(-0.2rem) rotate3d(1,0,0,0deg);
+  transform: scale(1.05) translateY(-0.2rem) rotate3d(1,0,0,0deg);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
