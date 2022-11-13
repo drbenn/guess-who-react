@@ -1,7 +1,7 @@
 .card-list {
-  width: 70vw;
+  width: 80vw;
   margin: 0 auto;
-  padding: 2rem 0 1rem 0;
+  padding: 1vw 0 0.5vw 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -23,10 +23,14 @@
   padding: 0.2rem;
   cursor:pointer;
 
-  transform: translateZ(0);
-  transition: transform 0.35s;
+  transform: rotate3d(1,0,0, 30deg);
+  transition: 0.45s;
   margin: 1rem;
-  width:9%;
+  width:5.2vw;
+  min-width: 5rem;
+  /* border: 1px solid red; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+
 }
 
 .card-container img {
@@ -35,5 +39,6 @@
 }
 
 .card-container:hover {
-  transform: scale(1.2);
+  transform: scale(1.1) translateY(-0.2rem) rotate3d(1,0,0,0deg);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
