@@ -20,6 +20,8 @@ const Card = ({character}) => {
         src={require(`../../assets/character-img/${img}`)}
         onClick={cardClick}
         />
+        {/* <div className='image-overlay'>X</div> */}
+        <div className='image-overlay'>&#10004;</div>
 
 
     </div>
