@@ -12,6 +12,7 @@ function App() {
         Guess Who
       </h1>
       <div className='select-flex'>
+        <h2>Ask: Does the person...</h2>
         <select className="custom-select" name="questions" id="questions">
           <option disabled selected hidden>Question Topic...</option>
           <option value="gender">Gender</option>
