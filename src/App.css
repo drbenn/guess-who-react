@@ -21,13 +21,13 @@
   appearance: none;
   height: 57px;
   padding: 10px 38px 10px 16px;
-  background-color: rgb(252, 252, 252);
+  background-color: #fcf9ea;
   margin: 0 3.5vw;
   /* font-family: 'Poppins', sans-serif; */
   font-family: 'Lato', sans-serif;
   font-weight: 400;
   font-size: 1.3rem;
-  color:rgb(100, 100, 100);
+  color:rgb(28, 28, 28);
   border: none;
   border-bottom: 4px solid rgb(29, 29, 29);
   transition: 400ms ease;
@@ -36,12 +36,12 @@
 }
 
 .custom-select:hover {
-  border-bottom: 6px solid #d9b205;
-  background-color: #f8cf1f;
+  border-bottom: 6px solid #f8cf1f;
+  /* background-color: #fff1b1; */
   transition: 400ms ease;
 }
 .custom-select:focus {
-  border-bottom: 4px solid #d9b205;
+  border-bottom: 4px solid #f8cf1f;
   color:rgb(0, 0, 0);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   outline: none;
