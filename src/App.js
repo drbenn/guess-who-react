@@ -47,27 +47,45 @@ function App() {
 
   return (
     <div className="App">
-      <h1> 
-        Guess Who
-      </h1>
+      <div className='title-group'>
+        <div className='shift-lines'>
+          <div className='line-1'>
+            <div className='red-title-1'>Guess</div> 
+            <div className='blue-title-1'>Guess</div>
+          </div>
+          <div className='line-2'>
+            <div className='red-title-2'>Who</div> 
+            <div className='blue-title-2'>Who</div>
+          </div>
+          <div className='line-3'>
+            <div className='red-title-3'>?</div>
+            <div className='blue-title-3'>?</div>
+          </div>
+        </div>
+      </div>
       {/* {console.log(questions)} */}
       <div className='select-flex'>
-        <h2>Ask: Does the person...</h2>
+        <div className='ask-text'>
+          Ask:
+        </div>
 
-        <select className="custom-select" name="questions" id="questions" onChange={onSelectChange}>
-          <option disabled selected hidden>Question Topic...</option>
-          {questions.map(question => (
-                <option value={question.primaryValue}>{question.primaryQuestion}</option>
-          ))}
+        <div>
+          <select className="custom-select" name="questions" id="questions" onChange={onSelectChange}>
+            <option disabled selected hidden>Question Topic...</option>
+            {questions.map(question => (
+                  <option value={question.primaryValue}>{question.primaryQuestion}</option>
+            ))}
 
-        </select>
+          </select>
+        </div>
 
-        <select className="custom-select" name="questions" id="questions">
-          <option disabled selected hidden>Topic Options...</option>
-          <option value="gender">Male</option>
-          <option value="female">Female</option>
-        </select>
-
+        <div>
+          <select className="custom-select" name="questions" id="questions">
+            <option disabled selected hidden>Topic Options...</option>
+            <option value="gender">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
       </div>
       {/* {console.log('app chars')}
       {console.log(characters)} */}

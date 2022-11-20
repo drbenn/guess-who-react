@@ -6,8 +6,9 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  border: 1px rgb(175, 175, 175) solid;
-  border-radius: 3px;
+  border: 1.5rem var(--g-blue) solid;
+  border-radius: 3.5rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   background-image: url('../../assets/bg-img/p14.png');
   background-repeat: repeat;
 }
@@ -17,7 +18,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f8cf1f;
+  background-color: var(--g-yellow);
   border: 1px solid #dab513df;
   border-radius: 2px;
   padding: 0rem 0.2rem;
@@ -43,8 +44,8 @@
 }
 
 .image-overlay {
-  /* color: rgb(228, 75, 75); */
-  color: rgb(95, 210, 120);
+  /* color: var(--g-check-red); */
+  color: var(--g-check-green);
   position: relative;
   z-index: 10;
   top: -5rem;
