@@ -3,6 +3,7 @@ import './App.css';
 import CardList from './components/card-list/card-list.component';
 import { characters } from './assets/data/characters';
 import { questions } from './assets/data/questions'
+import * as gameService from './services/game.service'
 
 // UserContext provides the value from the user.context provider where value={value}
 // where the value is the current user as well as the setter setCurrentUser
@@ -10,6 +11,8 @@ import { GameContext } from './contexts/game.context'
 
 
 function App() {
+  gameService.randomGameCharacter();
+  gameService.questionResponse('sex','m');
   let selectedPrimaryQuestion;
   let selectedQuestionObject;
   let secondOption;
