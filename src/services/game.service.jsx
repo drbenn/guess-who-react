@@ -7,23 +7,24 @@ import { questions } from '../assets/data/questions'
 
 
 // export default GameService;
-let randomCharacter;
+
 
 
 export function randomGameCharacter() {
   const chars = characters;
   const randomCharacterIndex = Math.round(characters.length * Math.random())
   const gameCharacter = chars[randomCharacterIndex]
-  this.randomCharacter = gameCharacter;
-  console.log(gameCharacter);
+  // console.log(gameCharacter);
   // push gameCharacter to state
+  return gameCharacter;
 }
 
 export function questionResponse(topic,option){
   let char = this.randomCharacter;
-  console.log('in quesResponse func');
-  console.log(char);
-  console.log('its actually still available?');
-  console.log(char.sex);
+  // console.log('in quesResponse func');
+  // console.log(char);
+  // console.log('its actually still available? -- NO -- will need to take from state');
+  // console.log(char.sex);
+  // console.log(char.sex.value);
 
 }

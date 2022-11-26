@@ -189,7 +189,6 @@ font-stretch: ultra-expanded;
   border: none;
   border-bottom: 4px solid rgb(29, 29, 29);
   transition: 400ms ease;
-
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
@@ -210,3 +209,50 @@ select::-ms-expand {
   display:none;
 }
 
+
+/*  GUESSES */
+
+.guesses-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.guess-box {
+  height:4rem;
+  width: 4rem;
+  border: 1px solid black;
+  background-color: white;
+  margin: 0 1rem;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 2.5rem;
+}
+
+
+/* RESPONSE */
+
+.response {
+  font-size: 2rem;
+  font-weight: 600;
+  animation: responseFly 1.5s ease-out;
+}
+
+.response-yes {
+ color: var(--g-check-green)
+}
+
+.response-no {
+  color: var(--g-check-red)
+}
+
+@keyframes responseFly {
+  0% {
+    transform: scale(6) translateY(-5rem);
+  }
+  70% {
+    transform: scale(3) ;  
+  }
+  100% {
+    transform: scale(1) translateY(0rem);
+  }
+  
+}
