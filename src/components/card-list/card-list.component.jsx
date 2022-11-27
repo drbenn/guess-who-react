@@ -6,7 +6,8 @@ import './card-list.styles.css';
 const CardList = props => {
     // console.log(props);
     const characters = props.characters;
-    let activeMarker = props.activeMarker;
+    const activeMarker = props.activeMarker;
+    const onCardClick = props.onCardClick;
 
     function classUpdate() {
         console.log('something');
@@ -20,7 +21,7 @@ const CardList = props => {
             {console.log(characters)} */}
 
             {characters.map((character) => {
-                return <Card key={character.id} character={character} activeMarker={activeMarker} classUpdate={classUpdate} />
+                return <Card key={character.id} character={character} activeMarker={activeMarker} classUpdate={classUpdate}  onCardClick={onCardClick} />
             })}
         </div>
     )

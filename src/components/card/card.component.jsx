@@ -11,6 +11,7 @@ const Card = props => {
         // console.log(props);
         const character = props.character;
         let newMarker = props.activeMarker;
+        const onCardClick = props.onCardClick;
         // let classUpdate = props.classUpdate;
 
         // let cardStatus = 'image-overlay'
@@ -20,6 +21,7 @@ const Card = props => {
         let cardClick = () => {
             // setTestValue('click')
             console.log(name);
+            onCardClick(name);
             // console.log(activeMarker);
             if (newMarker === 'dismiss'  && cardClass !== 'dismiss-overlay') {setCardClass("dismiss-overlay"); setCardSymbol("X")};
             if (newMarker === 'dismiss' && cardClass === 'dismiss-overlay') {setCardClass(""); setCardSymbol("")};

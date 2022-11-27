@@ -16,6 +16,7 @@ function App() {
 
   // STATE
   const [secretPerson, setSecretPerson] = useState("");
+  const [personClicked, setPersonClicked] = useState("");
   const [activeMarker, setActiveMarker] = useState("dismiss");
   const [guesses, setGuesses] = useState([[0, false],[0, false],[0, false],[0, false],[0, false]]);
   const [currentGuess, setCurrentGuess] = useState(0);
@@ -24,13 +25,32 @@ function App() {
   const [primaryQuestion, setPrimaryQuestion] = useState("");
   const [secondaryQuestions, setSecondaryQuestions] = useState([]);
   const [helperResponse, setHelperResponse] = useState("");
-  const [gameOutcome, setGameOutcome] = useState("");
+  const [gameOutcome, setGameOutcome] = useState("wrong");
+  const [endGameModal, setEndGameModal] = useState(true);
 
   // assists with resetting random key generation to re-render for response fly animation if multiple wrong questions asked in a row
   // set secret character at beginning of game - useEffect is similar to ngOnInit
   useEffect(() => {
     setSecretPerson(() => gameService.randomGameCharacter());    
   }, [])
+
+  function onCardClick(name) {
+    setPersonClicked(name)
+    let secretName = secretPerson.name;
+    let didChooseSecretPerson = name === secretName;
+    console.log(setPersonClicked);
+    console.log(secretName);
+    console.log(didChooseSecretPerson);
+
+    // IF Guess
+    setGameOutcome("wrong")
+
+    // if guess and wrong make another wrong mark and Funky fail response animation - GUESS SUCCESS BOOLEAN
+    setGameOutcome("lose");
+
+    // if guess and right mark card giant check and 
+    setGameOutcome("win");
+  }
 
 
 function testBtn() {
@@ -43,6 +63,7 @@ function testBtn() {
     console.log('SecondaryQuestions: ', secondaryQuestions);
     console.log('Guesses: ', guesses);
     console.log('GuessTrigger: ', guessTrigger);
+    console.log('PersonClicked: ', personClicked );
 }
 
 function dismissToggle() {
@@ -270,7 +291,38 @@ function submitQuestion($event) {
           </div>
         }
       </div>
-      <CardList characters={characters} activeMarker={activeMarker} onChange={value => console.log(value)} /> 
+      <CardList characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} /> 
+
+      {/* END GAME MODAL */}
+      {endGameModal && gameOutcome === "win" &&
+        <div className='end-game-modal'>
+          <div className='close-button'>X</div>
+            <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>🎉</div>YOU WIN!!!<div className='modal-icon-animation'>🎉</div></div>
+            <div className='endgame-detail-text'>_______ WAS INDEED THE SECRET PERSON</div>
+            <div className='play-again'>Play Again?</div>
+      </div>
+      }
+
+      {endGameModal && gameOutcome === "lose" &&
+        <div className='end-game-modal'>
+          <div className='close-button'>X</div>
+            <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>😖</div>YOU LOSE!!!<div className='modal-icon-animation'>😭</div></div>
+            <div className='endgame-detail-text'>You guessed wrong, it was not ________...and have already used your 5 questions/guesses!</div>
+            <div className='play-again'>Play Again?</div>
+      </div>
+      }
+
+      {endGameModal && gameOutcome === "wrong" &&
+        <div className='end-game-modal'>
+          <div className='close-button'>X</div>
+            <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>🤨</div>WRONG PERSON!!!<div className='modal-icon-animation'>😝</div></div>
+            <div className='endgame-detail-text'>It is not _____ ...but you still have remaining questions/guesses!</div>
+            <div className='play-again'>Continue Game</div>
+
+      </div>
+      }
+
+
     </div>
   );
 }
