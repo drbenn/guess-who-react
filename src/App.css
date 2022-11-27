@@ -4,6 +4,7 @@
   --g-red:#E92A48;
   --g-check-green:#60d279;
   --g-check-red: #e44b4b;
+  --g-response: #1f1f1f86;
 
 
 }
@@ -231,9 +232,14 @@ select::-ms-expand {
 /* RESPONSE */
 
 .response {
-  font-size: 2rem;
-  font-weight: 600;
+
+  /* border: 1px solid red; */
+  width: 70vw;
+  font-size: calc(1.5rem + 0.8vw);
+  font-weight: 800;
   animation: responseFly 1.5s ease-out;
+  -webkit-text-stroke: 1px var(--g-response);
+  text-shadow: -1px -1px 2px var(--g-response);
 }
 
 .response-yes {
@@ -248,9 +254,15 @@ select::-ms-expand {
   0% {
     transform: scale(6) translateY(-5rem);
   }
-  70% {
-    transform: scale(3) ;  
+  50% {
+    transform: scale(2) translateY(-8rem);
   }
+  80% {
+    transform: scale(2)  translateY(-8rem) ;  
+  }
+  /* 90% {
+    transform: translateY(-5rem) ;  
+  } */
   100% {
     transform: scale(1) translateY(0rem);
   }
