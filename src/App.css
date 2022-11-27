@@ -268,3 +268,26 @@ select::-ms-expand {
   }
   
 }
+
+.response-mark-delay:last-of-type {
+  animation: responseMarkFade 1.5s ease-out;
+}
+
+@keyframes responseMarkFade {
+  0% {
+    transform: scale(6) translateY(0);
+  }
+  50% {
+    transform: scale(2) translateY(0);
+  }
+  80% {
+    transform: scale(2)  translateY(0) ;  
+  }
+  /* 90% {
+    transform: translateY(-5rem) ;  
+  } */
+  100% {
+    transform: scale(1) translateY(0rem);
+  }
+  
+}

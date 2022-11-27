@@ -19,7 +19,9 @@ function App() {
   // STATE
   const [secretPerson, setSecretPerson] = useState("");
   const [activeMarker, setActiveMarker] = useState("dismiss");
-  const [guesses, setGuesses] = useState([0,0,0,0,0]);
+  const [guesses, setGuesses] = useState([[0, false],[0, false],[0, false],[0, false],[0, false]]);
+  // // Guess lag used to id last marker box for use on animation on that single block, not all blocks on the map re-render
+  // const [guessesLag1, setGuessesLag1] = useState([0,0,0,0,0]);
   const [currentGuess, setCurrentGuess] = useState(0);
   const [primaryQuestion, setPrimaryQuestion] = useState("");
   const [secondaryQuestions, setSecondaryQuestions] = useState([]);
@@ -74,6 +76,7 @@ function testBtn() {
     console.log('ActiveMarker: ', activeMarker);
     console.log('PrimaryQuestion: ', primaryQuestion);
     console.log('SecondaryQuestions: ', secondaryQuestions);
+    console.log('Guesses: ', guesses);
 }
 
 function dismissToggle() {
@@ -90,7 +93,7 @@ function updateQuestions($event) {
 
   let secondaryQuestions = questions.filter((obj) => obj.primaryValue === primaryQuestion)[0].secondaryOptions
   setSecondaryQuestions(() => secondaryQuestions)
-  console.log(secondaryQuestions);
+  // console.log(secondaryQuestions);
   // secondOptionsDisplay = secondaryQuestions.map((el) => <option key={el} value={el}>{el}</option>)
 }
 
@@ -99,33 +102,47 @@ function submitQuestion($event) {
   let guess = secondQuestionValue;
 
   console.log(guess);
-  console.log(primaryQuestion);
-  console.log(secretPerson);
+  // console.log(primaryQuestion);
+  // console.log(secretPerson);
   let secretAttribute = secretPerson[primaryQuestion]
-  console.log(secretAttribute);
+  // console.log(secretAttribute);
   let isGuessCorrect = secretAttribute === guess;
-  console.log(isGuessCorrect);
+  // console.log(isGuessCorrect);
 
 
   if (isGuessCorrect) {
     setHelperResponse('Yes! The person has this trait!')
-    console.log(helperResponse.length);
+    // console.log(helperResponse.length);
     setGuesses((guesses) => {
-      let newGuessArray = guesses
-      newGuessArray[currentGuess] = 1;
+      let newGuessArray = guesses.map(item=> {
+        return [item[0], false]
+       });
+
+
+      newGuessArray[currentGuess][0] = 1;
+      newGuessArray[currentGuess][1] = true;
+      // console.log(newGuessArray);
+
       return newGuessArray
     });
 
   }
   if (!isGuessCorrect) {
-    console.log(guess);
-    console.log(storedIncorrectResponseQuestion);
+    // console.log(guess);
+    // console.log(storedIncorrectResponseQuestion);
     setHelperResponse('No! The person does NOT have this trait...')
     storedIncorrectResponseQuestion = guess;
-    console.log(helperResponse.length);
+    // console.log(helperResponse.length);
     setGuesses((guesses) => {
-      let newGuessArray = guesses
-      newGuessArray[currentGuess] = 2;
+      let newGuessArray = guesses.map(item=> {
+        return [item[0], false]
+       });
+
+
+      newGuessArray[currentGuess][0] = 2;
+      newGuessArray[currentGuess][1] = true;
+      // console.log(newGuessArray);
+
       return newGuessArray
     });
   }
@@ -159,19 +176,30 @@ function submitQuestion($event) {
       <button onClick={testBtn}>TEST</button>
       <div className='guesses-container'>
       {guesses.map((guess) => {
-          if (guess === 0) {
+        console.log(guess);
+          if (guess[0] === 0) {
             return (
               <div key={Math.random()} className='guess-box'></div>
             )
           }
-          if (guess === 1) {
+          if (guess[0] === 1 && guess[1] === true) {
             return (
-              <div key={Math.random()} className='guess-box response-yes'>&#10004;</div>
+              <div key={Math.random()} className='guess-box response-yes'><div className='response-mark-delay'>&#10004;</div></div>
             )
           }
-          if (guess === 2) {
+          if (guess[0] === 2 && guess[1] === true) {
             return (
-              <div key={Math.random()} className='guess-box response-no'>X</div>
+              <div key={Math.random()} className='guess-box response-no'><div className='response-mark-delay'>X</div></div>
+            )
+          }
+          if (guess[0] === 1 && guess[1] === false) {
+            return (
+              <div key={Math.random()} className='guess-box response-yes'><div className=''>&#10004;</div></div>
+            )
+          }
+          if (guess[0] === 2 && guess[1] === false) {
+            return (
+              <div key={Math.random()} className='guess-box response-no'><div className=''>X</div></div>
             )
           }
             return null
