@@ -24,6 +24,7 @@ function App() {
   const [primaryQuestion, setPrimaryQuestion] = useState("");
   const [secondaryQuestions, setSecondaryQuestions] = useState([]);
   const [helperResponse, setHelperResponse] = useState("");
+  const [gameOutcome, setGameOutcome] = useState("");
 
   // assists with resetting random key generation to re-render for response fly animation if multiple wrong questions asked in a row
   // set secret character at beginning of game - useEffect is similar to ngOnInit
@@ -220,10 +221,10 @@ function submitQuestion($event) {
           </select>
 
         </div>
-
+          
+        {secondaryQuestions.length > 0 && 
         <div>
-          <select className="custom-select" name="questions" id="secondaryQuestions" onChange={event => submitQuestion(event)}>
-            {/* <option disabled selected hidden>Pick One...</option> */}
+          <select className="custom-select-2nd" name="questions" id="secondaryQuestions" onChange={event => submitQuestion(event)}>
               {secondaryQuestions.map(question => {
 
                 if (question === "Pick One...") {
@@ -239,6 +240,11 @@ function submitQuestion($event) {
 
           </select>
         </div>
+        
+        }
+
+
+
         <button onClick={dismissToggle}>Dismiss</button>
           <button onClick={guessToggle}>Guess</button>
       </div>
