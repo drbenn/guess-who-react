@@ -223,7 +223,7 @@ function submitQuestion($event) {
           </div>
         }
       </div>
-      <CardList characters={characters} onChange={value => console.log(value)} /> 
+      <CardList characters={characters} activeMarker={activeMarker} onChange={value => console.log(value)} /> 
     </div>
   );
 }
