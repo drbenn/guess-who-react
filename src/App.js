@@ -20,6 +20,7 @@ function App() {
   const [secretPerson, setSecretPerson] = useState("");
   const [activeMarker, setActiveMarker] = useState("dismiss");
   const [guesses, setGuesses] = useState([0,0,0,0,0]);
+  const [currentGuess, setCurrentGuess] = useState(0);
   const [primaryQuestion, setPrimaryQuestion] = useState("");
   const [secondaryQuestions, setSecondaryQuestions] = useState([]);
   const [helperResponse, setHelperResponse] = useState("");
@@ -104,9 +105,17 @@ function submitQuestion($event) {
   console.log(secretAttribute);
   let isGuessCorrect = secretAttribute === guess;
   console.log(isGuessCorrect);
+
+
   if (isGuessCorrect) {
     setHelperResponse('Yes! The person has this trait!')
     console.log(helperResponse.length);
+    setGuesses((guesses) => {
+      let newGuessArray = guesses
+      newGuessArray[currentGuess] = 1;
+      return newGuessArray
+    });
+
   }
   if (!isGuessCorrect) {
     console.log(guess);
@@ -114,8 +123,17 @@ function submitQuestion($event) {
     setHelperResponse('No! The person does NOT have this trait...')
     storedIncorrectResponseQuestion = guess;
     console.log(helperResponse.length);
+    setGuesses((guesses) => {
+      let newGuessArray = guesses
+      newGuessArray[currentGuess] = 2;
+      return newGuessArray
+    });
   }
+  setCurrentGuess((currentGuess) => currentGuess + 1)
+  // console.log(currentGuess);
+  // console.log(guesses);
 
+  // IF currentGuess = 5 - all attemps spent - IF NO WIN on try 5, OTHERWISE TRIGGER GAME OVER
 
 }
 
@@ -141,12 +159,23 @@ function submitQuestion($event) {
       <button onClick={testBtn}>TEST</button>
       <div className='guesses-container'>
       {guesses.map((guess) => {
-                return (
-                  <div className='guess-box' style={{color:'green'}}></div>
-                )
-            })}
-
-
+          if (guess === 0) {
+            return (
+              <div key={Math.random()} className='guess-box'></div>
+            )
+          }
+          if (guess === 1) {
+            return (
+              <div key={Math.random()} className='guess-box response-yes'>&#10004;</div>
+            )
+          }
+          if (guess === 2) {
+            return (
+              <div key={Math.random()} className='guess-box response-no'>X</div>
+            )
+          }
+            return null
+          })}
       </div>
 
 
