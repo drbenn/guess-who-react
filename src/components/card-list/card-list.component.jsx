@@ -4,7 +4,7 @@ import './card-list.styles.css';
 
 
 const CardList = props => {
-    console.log(props);
+    // console.log(props);
     const characters = props.characters;
     let activeMarker = props.activeMarker;
 
@@ -16,8 +16,8 @@ const CardList = props => {
     return (
         <div className='card-list'>
 
-            {console.log('card-list')}
-            {console.log(characters)}
+            {/* {console.log('card-list')}
+            {console.log(characters)} */}
 
             {characters.map((character) => {
                 return <Card key={character.id} character={character} activeMarker={activeMarker} classUpdate={classUpdate} />
