@@ -34,7 +34,7 @@ function App() {
     setSecretPerson(() => gameService.randomGameCharacter());    
   }, [])
 
-  // TODO - play again button, if dismiss/guess button selected have it darker while active not just hover
+  // TODO - play again button, if dismiss/guess button selected have it darker while active not just hover, and general ? HELP button w instructions and links, dismiss overlay not working now...and do the intro white splash large logo
 
   function onCardClick(name) {
     setPersonClicked(name)
