@@ -7,13 +7,15 @@ const CardList = props => {
     const activeMarker = props.activeMarker;
     const onCardClick = props.onCardClick;
     const gameOutcome = props.gameOutcome;
+    const resetAllCards = props.resetAllCards;
    
     return (
         <div className='card-list'>
             {characters.map((character) => {
                 return (
                     <Card 
-                    key={character.id} character={character} activeMarker={activeMarker} onCardClick={onCardClick} gameOutcome={gameOutcome} 
+                    key={character.id} character={character} activeMarker={activeMarker} 
+                    onCardClick={onCardClick} gameOutcome={gameOutcome} resetAllCards={resetAllCards}
                     />
                 )
             })}

@@ -1,13 +1,9 @@
-import { useState, useContext, useEffect,useMemo } from 'react';
+import { useState, useEffect} from 'react';
 import './App.css';
 import CardList from './components/card-list/card-list.component';
 import { characters } from './assets/data/characters';
 import { questions } from './assets/data/questions'
 import * as gameService from './services/game.service'
-
-// UserContext provides the value from the user.context provider where value={value}
-// where the value is the current user as well as the setter setCurrentUser
-import { GameContext } from './contexts/game.context'
 
 
 
@@ -17,16 +13,20 @@ function App() {
   // STATE
   const [secretPerson, setSecretPerson] = useState("");
   const [personClicked, setPersonClicked] = useState("");
-  const [activeMarker, setActiveMarker] = useState("dismiss");
+  const [activeMarker, setActiveMarker] = useState("");
+  const [activeMarkerClass, setActiveMarkerClass] = useState(["dismiss-button","guess-button"]);
   const [guesses, setGuesses] = useState([[0, false],[0, false],[0, false],[0, false],[0, false]]);
   const [currentGuess, setCurrentGuess] = useState(0);
   // Animation re-render trigger 
-  const [guessTrigger, setGuessTrigger] = useState(true)
+  const [guessTrigger, setGuessTrigger] = useState(true);
   const [primaryQuestion, setPrimaryQuestion] = useState("");
   const [secondaryQuestions, setSecondaryQuestions] = useState([]);
   const [helperResponse, setHelperResponse] = useState("");
   const [gameOutcome, setGameOutcome] = useState("");
-  const [gameModal, setGameModal] = useState(true);
+  const [gameModal, setGameModal] = useState(false);
+  const [helpModal, setHelpModal] = useState(false);
+  const [resetAllCards, setResetAllCards] = useState(false);
+  
 
   // assists with resetting random key generation to re-render for response fly animation if multiple wrong questions asked in a row
   // set secret character at beginning of game - useEffect is similar to ngOnInit
@@ -34,7 +34,38 @@ function App() {
     setSecretPerson(() => gameService.randomGameCharacter());    
   }, [])
 
-  // TODO - play again button, if dismiss/guess button selected have it darker while active not just hover, and general ? HELP button w instructions and links, dismiss overlay not working now...and do the intro white splash large logo
+  // TODO - intro white splash large logo, clear all cards on reset game(maybe if statement on card list so it will just rerender with blanks on newgame?)
+  // fix result render over animations(on help button and markertype change)
+  //- maybe if statement...only with if 2nd wuestion changes!
+
+  function startNewGame() {
+    console.log('start new game');
+    setResetAllCards(true);
+    setSecretPerson("");
+    setPersonClicked("");
+    setActiveMarker("");
+    setActiveMarkerClass(["dismiss-button","guess-button"]);
+    setGuesses([[0, false],[0, false],[0, false],[0, false],[0, false]]);
+    setCurrentGuess(0);
+    // Animation re-render trigger 
+    setGuessTrigger(true);
+    setPrimaryQuestion("");
+    setSecondaryQuestions([]);
+    setHelperResponse("");
+    setGameOutcome("");
+    setGameModal(false);
+    setSecretPerson(() => gameService.randomGameCharacter()); 
+    setResetAllCards(false); 
+
+  }
+
+  // function resetAllCards() {
+  //   console.log('resetcards');
+  // }
+
+  function toggleHelpModal() {
+    setHelpModal(!helpModal);
+  }
 
   function onCardClick(name) {
     setPersonClicked(name)
@@ -71,6 +102,7 @@ function App() {
 
   function closeModal() {
     setGameModal(false);
+    setHelpModal(false);
   }
 
 function testBtn() {
@@ -87,11 +119,13 @@ function testBtn() {
 }
 
 function dismissToggle() {
-  setActiveMarker(() => "dismiss");    
+  setActiveMarker(() => "dismiss"); 
+  setActiveMarkerClass(["dismiss-button-active","guess-button"]);
 }
 
 function guessToggle() {
   setActiveMarker(() => "guess");   
+  setActiveMarkerClass(["dismiss-button","guess-button-active"]);
 }
 
 function updateQuestions($event) {
@@ -176,7 +210,7 @@ function submitQuestion($event) {
           </div>
         </div>
       </div>
-      <button onClick={testBtn}>TEST</button>
+      {/* <button onClick={testBtn}>TEST</button> */}
       <div className='guesses-container'>
       {guesses.map((guess) => {
 
@@ -230,49 +264,53 @@ function submitQuestion($event) {
 
 
       {/* {console.log(questions)} */}
-      <div className='select-flex'>
-        <div className='ask-text'>
-          Ask:
-        </div>
+      <div className='wrap-flex'>
+       <div className='select-flex'>
+          {/* <div className='ask-text'>
+            Ask:
+          </div> */}
 
-        <div>
-          {/* <select className="custom-select" name="questions" id="questions" onChange={onSelectChange}> */}
-          <select className="custom-select" name="questions" id="questions" onChange={event => updateQuestions(event)}>
-            <option disabled selected hidden  >Question Topic...</option>
-            {questions.map(question => (
-                  <option value={question.primaryValue}>{question.primaryQuestion}</option>
-            ))}
+          <div>
+            {/* <select className="custom-select" name="questions" id="questions" onChange={onSelectChange}> */}
+            <select className="custom-select" name="questions" id="questions" onChange={event => updateQuestions(event)}>
+              <option disabled selected hidden  >Ask Topic...</option>
+              {questions.map(question => (
+                    <option value={question.primaryValue}>{question.primaryQuestion}</option>
+              ))}
 
-          </select>
+            </select>
 
-        </div>
+          </div>
+            
+          {secondaryQuestions.length > 0 && 
+          <div>
+            <select className="custom-select-2nd" name="questions" id="secondaryQuestions" onChange={event => submitQuestion(event)}>
+                {secondaryQuestions.map(question => {
+
+                  if (question === "Pick One...") {
+                    return <option key={Math.random()} disabled selected hidden>Pick One...</option> 
+                  }
+                  else {
+                    return (
+                      <option key={Math.random()} value={question}>{question}</option>
+                    )     
+                  }
+                }
+          )}
+
+            </select>
+          </div>
           
-        {secondaryQuestions.length > 0 && 
-        <div>
-          <select className="custom-select-2nd" name="questions" id="secondaryQuestions" onChange={event => submitQuestion(event)}>
-              {secondaryQuestions.map(question => {
-
-                if (question === "Pick One...") {
-                  return <option key={Math.random()} disabled selected hidden>Pick One...</option> 
-                }
-                else {
-                  return (
-                    <option key={Math.random()} value={question}>{question}</option>
-                  )     
-                }
-              }
-         )}
-
-          </select>
-        </div>
-        
-        }
+          }
 
 
-        <div className='active-marker-container'>
-          <div className='dismiss-button' onClick={dismissToggle}>Dismiss</div>
-          <div className='guess-button' onClick={guessToggle}>Guess</div>
-        </div>
+              <div className='active-marker-container'>
+                <div className={activeMarkerClass[0]} onClick={dismissToggle}>Dismiss</div>
+                <div className={activeMarkerClass[1]} onClick={guessToggle}>Guess</div>
+              </div>
+          </div>
+
+
       </div>
       <div>
         {helperResponse && helperResponse.length < 32 &&  guessTrigger &&
@@ -296,7 +334,7 @@ function submitQuestion($event) {
           </div>
         }
       </div>
-      <CardList characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} gameOutcome={gameOutcome} /> 
+      <CardList characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} gameOutcome={gameOutcome} resetAllCards={resetAllCards} /> 
 
       {/* END GAME MODAL */}
       {/* Winning Guess, GAME OVER */}
@@ -305,7 +343,7 @@ function submitQuestion($event) {
           {/* <div className='close-button' onClick={closeModal}>X</div> */}
             <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>🎉</div>YOU WIN!!!<div className='modal-icon-animation'>🎉</div></div>
             <div className='endgame-detail-text'><span style={{ fontWeight: '800'}}>{secretPerson.name.toUpperCase()}</span> WAS INDEED THE SECRET PERSON</div>
-            <div className='play-again'>Play Again?</div>
+            <div className='play-again' onClick={startNewGame} >Play Again?</div>
             <div className='char-pic'>        
               <img alt={`Char ${secretPerson.name}`} src={require(`./assets/character-img/${secretPerson.img}`)}
               />
@@ -318,7 +356,7 @@ function submitQuestion($event) {
           {/* <div className='close-button' onClick={closeModal}>X</div> */}
             <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>😖</div>YOU LOSE!!!<div className='modal-icon-animation'>😭</div></div>
             <div className='endgame-detail-text'>You guessed wrong, it was not <span style={{ fontWeight: '800'}}>{personClicked.toUpperCase()}</span>...and have already used your 5 questions/guesses!</div>
-            <div className='play-again'>Play Again?</div>
+            <div className='play-again' onClick={startNewGame} >Play Again?</div>
             <div className='char-pic'>        
               <img alt={`Char ${personClicked}`} src={require(`./assets/character-img/${personClicked}.png`)}
               />
@@ -335,7 +373,7 @@ function submitQuestion($event) {
             <br></br>
             Hint: Ask questions for your first 4 attempts, select the dismiss button and click characters as you go to rule them out, on your 5th attempt, click the guess button and then click the card with your most excellent and educated guess!!
             </div>
-            <div className='play-again'>Play Again?</div>
+            <div className='play-again' onClick={startNewGame} >Play Again?</div>
         </div>
       }
       {/* Wrong guess, but can keep playing */}
@@ -344,7 +382,7 @@ function submitQuestion($event) {
           {/* <div className='close-button' onClick={closeModal}>X</div> */}
             <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>🤨</div>WRONG PERSON!!!<div className='modal-icon-animation'>😝</div></div>
             <div className='endgame-detail-text'>It is not <span style={{ fontWeight: '800'}}>{personClicked.toUpperCase()}</span> ...but you still have remaining questions/guesses!</div>
-            <div className='play-again'>Continue Game</div>
+            <div className='play-again' onClick={closeModal}>Continue Game</div>
             <div className='char-pic'>        
               <img alt={`Char ${personClicked}`} src={require(`./assets/character-img/${personClicked}.png`)}
               />
@@ -353,7 +391,22 @@ function submitQuestion($event) {
       </div>
       }
 
+      {/* HELP MODAL */}
+      {helpModal && 
+        <div className='end-game-modal'>
+          {/* <div className='close-button' onClick={closeModal}>X</div> */}
+          <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>🤷‍♂️</div>Help<div className='modal-icon-animation'>🤷‍♀️</div></div>
+          <div className='help-detail-text'>
+            <p>The goal is to use hints and then guess the secret person</p>
+            <p>You have 5 attempts, click the drop-down to ask a question and get a hint, this will use 1 attempt. Use the hint and click the dismiss button, then click on cards that you can eliminate from the choices.</p>
+            <p>Clicking on the guess button and selecting a card will also use a guess. You do not need to wait until the final attempt to guess, if you guess and still have attempts you can continue playing until you run out of attempts.</p>                 
+          </div>
+          <div className='play-again' onClick={closeModal}>Continue Game</div>
+          <p><a href="https://www.danbennett.dev" target="_blank" rel="noreferrer">danbennett.dev</a></p>
+        </div>
+      }
 
+      <div className='help-button' onClick={toggleHelpModal}>Help</div>
     </div>
   );
 }
