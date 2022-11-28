@@ -252,6 +252,59 @@ select::-ms-expand {
 }
 
 
+
+/* MARKER BUTTONS */
+
+.active-marker-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-self: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background-color: white;
+  border-radius: 1.2rem;
+
+  border-radius: 2rem;
+  border: 0.4rem solid var(--g-yellow);
+
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.dismiss-button {
+  padding: 0 1rem;
+  border-left:  0.1rem solid rgb(176, 176, 176);
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  padding: 0.4rem 0.6rem 0.6rem 0.8rem;
+  color: var(--g-blue);
+  text-shadow: 1px 1px 2px rgb(63, 63, 63);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.guess-button {
+  padding: 0 1rem;
+  border-left:  0.1rem solid rgb(176, 176, 176);
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  padding: 0.4rem 1.2rem 0.6rem 0.6rem;
+  color: var(--g-blue);
+  text-shadow: 1px 1px 2px rgb(63, 63, 63);
+  transition: .2s ease-in;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.dismiss-button:hover, .guess-button:hover {
+  background-color: rgb(236, 236, 236);
+  transition: .2s ease-in;
+}
+
+
+
+
+
+
 /*  GUESSES */
 
 .guesses-container {
@@ -268,7 +321,10 @@ select::-ms-expand {
   margin: 0 1rem;
   font-family: 'Luckiest Guy', cursive;
   font-size: 2.5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+
 
 
 /* RESPONSE */
@@ -285,11 +341,13 @@ select::-ms-expand {
 }
 
 .response-yes {
- color: var(--g-check-green)
+ color: var(--g-check-green);
+ text-shadow: 1px 1px 2px rgb(63, 63, 63);
 }
 
 .response-no {
-  color: var(--g-check-red)
+  color: var(--g-check-red);
+  text-shadow: 1px 1px 2px rgb(63, 63, 63);
 }
 
 .response-fly-animation {
@@ -366,7 +424,7 @@ select::-ms-expand {
   font-weight: 600;
   color: black;
   background-color: var(--g-yellow);
-  padding: 0.02rem 0.4rem 0.2rem 0.4rem;
+  padding: 0.04rem 0.4rem 0.2rem 0.4rem;
   border: 3px solid var(--g-blue);
   border-radius: 1rem;
   transition: all 0.2s;
@@ -388,13 +446,19 @@ select::-ms-expand {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  position: relative;
+  z-index:2;
 }
 
 .endgame-detail-text {
   font-size: 1.8rem;
   font-weight: 400;
-  padding: 4rem 0rem 1rem 0rem;
+  margin: 4rem 0rem 1rem 0rem;
   width: 80%;
+  position: relative;
+  z-index:2;
+  text-shadow: 1px 1px 2px rgb(38, 38, 38);
+  background-color: rgba(255, 255, 255, 0.564);
 }
 
 .play-again {
@@ -409,6 +473,8 @@ select::-ms-expand {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   cursor:pointer;
   transition: all 0.2s;
+  position: relative;
+  z-index:2;
 }
 
 .play-again:hover {
@@ -440,4 +506,13 @@ select::-ms-expand {
     transform: scale(1);
   }
   
+}
+
+.char-pic {
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  z-index:1;
+  filter: grayscale(0%);
 }

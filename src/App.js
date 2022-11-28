@@ -25,14 +25,16 @@ function App() {
   const [primaryQuestion, setPrimaryQuestion] = useState("");
   const [secondaryQuestions, setSecondaryQuestions] = useState([]);
   const [helperResponse, setHelperResponse] = useState("");
-  const [gameOutcome, setGameOutcome] = useState("wrong");
-  const [endGameModal, setEndGameModal] = useState(true);
+  const [gameOutcome, setGameOutcome] = useState("");
+  const [gameModal, setGameModal] = useState(true);
 
   // assists with resetting random key generation to re-render for response fly animation if multiple wrong questions asked in a row
   // set secret character at beginning of game - useEffect is similar to ngOnInit
   useEffect(() => {
     setSecretPerson(() => gameService.randomGameCharacter());    
   }, [])
+
+  // TODO - play again button, if dismiss/guess button selected have it darker while active not just hover
 
   function onCardClick(name) {
     setPersonClicked(name)
@@ -42,16 +44,34 @@ function App() {
     console.log(secretName);
     console.log(didChooseSecretPerson);
 
-    // IF Guess
-    setGameOutcome("wrong")
+    // opens win modal, no more guessing
+    if (didChooseSecretPerson && activeMarker === "guess") {
+      setCurrentGuess((currentGuess) => currentGuess + 1)
+      guesses[currentGuess][0] = 1;
+      setGameOutcome("win");
+      setGameModal(true);
+    }
 
-    // if guess and wrong make another wrong mark and Funky fail response animation - GUESS SUCCESS BOOLEAN
-    setGameOutcome("lose");
+    // opens wrong modal, allows to continue guessing
+    if (!didChooseSecretPerson  && guesses[4][0] === 0 && activeMarker === "guess") {
+      setCurrentGuess((currentGuess) => currentGuess + 1)
+      guesses[currentGuess][0] = 2;
+      setGameOutcome("wrong")
+      setGameModal(true);
+    }
 
-    // if guess and right mark card giant check and 
-    setGameOutcome("win");
+    // opens lose modal, no more guessing
+    if (!didChooseSecretPerson  && guesses[4][0] !== 0) {
+      setCurrentGuess((currentGuess) => currentGuess + 1)
+      guesses[currentGuess][0] = 2;
+      setGameOutcome("lose")
+      setGameModal(true);
+    }
   }
 
+  function closeModal() {
+    setGameModal(false);
+  }
 
 function testBtn() {
   console.log('%cCurrent State', `color: goldenrod; background: #3d09bf; font-size:1.2rem; font-family: Helvetica; 
@@ -82,11 +102,7 @@ function updateQuestions($event) {
   let secondaryQuestions = questions.filter((obj) => obj.primaryValue === primaryQuestion)[0].secondaryOptions
   secondaryQuestions.unshift("Pick One...")
 
-  // console.log(secondaryQuestions);
-  // console.log(secondaryQuestionsWithDefault);
   setSecondaryQuestions(() => secondaryQuestions)
-  // console.log(secondaryQuestions);
-  // secondOptionsDisplay = secondaryQuestions.map((el) => <option key={el} value={el}>{el}</option>)
 
 }
 
@@ -94,38 +110,26 @@ function submitQuestion($event) {
   setGuessTrigger(true)
   let secondQuestionValue = $event.target.value
   let guess = secondQuestionValue;
-  if (guess !== "Pick One...") {
-    // console.log(primaryQuestion);
-    // console.log(secretPerson);
+  if (guess !== "Pick One..." &&  gameOutcome !== "win" && gameOutcome !== "lose") {
     let secretAttribute = secretPerson[primaryQuestion]
-    // console.log(secretAttribute);
     let isGuessCorrect = secretAttribute === guess;
-    // console.log(isGuessCorrect);
-  
+ 
   
     if (isGuessCorrect) {
       setHelperResponse('Yes! The person has this trait!')
-      // console.log(helperResponse.length);
       setGuesses((guesses) => {
         let newGuessArray = guesses.map(item=> {
           return [item[0], false]
          });
-  
-  
         newGuessArray[currentGuess][0] = 1;
         newGuessArray[currentGuess][1] = true;
-        // console.log(newGuessArray);
-  
+        
         return newGuessArray
       });
   
     }
     if (!isGuessCorrect) {
-      // console.log(guess);
-      // console.log(storedIncorrectResponseQuestion);
       setHelperResponse('No! The person does NOT have this trait...')
-      // storedIncorrectResponseQuestion = guess;
-      // console.log(helperResponse.length);
       setGuesses((guesses) => {
         let newGuessArray = guesses.map(item=> {
           return [item[0], false]
@@ -134,20 +138,20 @@ function submitQuestion($event) {
   
         newGuessArray[currentGuess][0] = 2;
         newGuessArray[currentGuess][1] = true;
-        // console.log(newGuessArray);
-  
+
         return newGuessArray
       });
+
+
     }
     setCurrentGuess((currentGuess) => currentGuess + 1)
-    // console.log(currentGuess);
-    // console.log(guesses);
-  
-    // IF currentGuess = 5 - all attemps spent - IF NO WIN on try 5, OTHERWISE TRIGGER GAME OVER
 
-
-
-
+    // GAME OVER - TOO MANY GUESSES AND RAN OUT OF ATTEMPTS
+    console.log(currentGuess);
+    if (currentGuess === 4) {
+      setGameOutcome("guessed-out")
+      setGameModal(true);
+    }
   }
 
 
@@ -265,9 +269,10 @@ function submitQuestion($event) {
         }
 
 
-
-        <button onClick={dismissToggle}>Dismiss</button>
-          <button onClick={guessToggle}>Guess</button>
+        <div className='active-marker-container'>
+          <div className='dismiss-button' onClick={dismissToggle}>Dismiss</div>
+          <div className='guess-button' onClick={guessToggle}>Guess</div>
+        </div>
       </div>
       <div>
         {helperResponse && helperResponse.length < 32 &&  guessTrigger &&
@@ -291,33 +296,59 @@ function submitQuestion($event) {
           </div>
         }
       </div>
-      <CardList characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} /> 
+      <CardList characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} gameOutcome={gameOutcome} /> 
 
       {/* END GAME MODAL */}
-      {endGameModal && gameOutcome === "win" &&
+      {/* Winning Guess, GAME OVER */}
+      {gameModal && gameOutcome === "win" && secretPerson &&
         <div className='end-game-modal'>
-          <div className='close-button'>X</div>
+          {/* <div className='close-button' onClick={closeModal}>X</div> */}
             <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>🎉</div>YOU WIN!!!<div className='modal-icon-animation'>🎉</div></div>
-            <div className='endgame-detail-text'>_______ WAS INDEED THE SECRET PERSON</div>
+            <div className='endgame-detail-text'><span style={{ fontWeight: '800'}}>{secretPerson.name.toUpperCase()}</span> WAS INDEED THE SECRET PERSON</div>
             <div className='play-again'>Play Again?</div>
+            <div className='char-pic'>        
+              <img alt={`Char ${secretPerson.name}`} src={require(`./assets/character-img/${secretPerson.img}`)}
+              />
+            </div>
       </div>
       }
-
-      {endGameModal && gameOutcome === "lose" &&
+      {/* Wrong guess, GAME OVER */}
+      {gameModal && gameOutcome === "lose" && secretPerson &&
         <div className='end-game-modal'>
-          <div className='close-button'>X</div>
+          {/* <div className='close-button' onClick={closeModal}>X</div> */}
             <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>😖</div>YOU LOSE!!!<div className='modal-icon-animation'>😭</div></div>
-            <div className='endgame-detail-text'>You guessed wrong, it was not ________...and have already used your 5 questions/guesses!</div>
+            <div className='endgame-detail-text'>You guessed wrong, it was not <span style={{ fontWeight: '800'}}>{personClicked.toUpperCase()}</span>...and have already used your 5 questions/guesses!</div>
             <div className='play-again'>Play Again?</div>
+            <div className='char-pic'>        
+              <img alt={`Char ${personClicked}`} src={require(`./assets/character-img/${personClicked}.png`)}
+              />
+            </div>
       </div>
       }
-
-      {endGameModal && gameOutcome === "wrong" &&
+      {/* Out of turns, GAME OVER */}
+      {gameModal && gameOutcome === "guessed-out" && secretPerson &&
         <div className='end-game-modal'>
-          <div className='close-button'>X</div>
+          {/* <div className='close-button' onClick={closeModal}>X</div> */}
+            <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>😖</div>YOU LOSE!!!<div className='modal-icon-animation'>😭</div></div>
+            <div className='endgame-detail-text'>You only have 5 attempts to guess or ask questions!
+            <br></br>
+            <br></br>
+            Hint: Ask questions for your first 4 attempts, select the dismiss button and click characters as you go to rule them out, on your 5th attempt, click the guess button and then click the card with your most excellent and educated guess!!
+            </div>
+            <div className='play-again'>Play Again?</div>
+        </div>
+      }
+      {/* Wrong guess, but can keep playing */}
+      {gameModal && gameOutcome === "wrong" && secretPerson &&
+        <div className='end-game-modal'>
+          {/* <div className='close-button' onClick={closeModal}>X</div> */}
             <div className='endgame-modal-splash-text'><div className='modal-icon-animation'>🤨</div>WRONG PERSON!!!<div className='modal-icon-animation'>😝</div></div>
-            <div className='endgame-detail-text'>It is not _____ ...but you still have remaining questions/guesses!</div>
+            <div className='endgame-detail-text'>It is not <span style={{ fontWeight: '800'}}>{personClicked.toUpperCase()}</span> ...but you still have remaining questions/guesses!</div>
             <div className='play-again'>Continue Game</div>
+            <div className='char-pic'>        
+              <img alt={`Char ${personClicked}`} src={require(`./assets/character-img/${personClicked}.png`)}
+              />
+            </div>
 
       </div>
       }
