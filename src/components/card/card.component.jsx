@@ -10,24 +10,32 @@ const Card = props => {
     const resetAllCards = props.resetAllCards;
     const {id,name,img} = character
 
-    console.log(`Reset prop recv in card? :${character} : ${resetAllCards}`);
-    if (resetAllCards) {
-        console.log('reset all in card');
+    // Clears card marks on gamereset
+    if (resetAllCards && cardClass !== "") {
+        setCardSymbol("");
+        setCardClass("");
     }
+
 
     let cardClick = () => {
         onCardClick(name);
-        if (gameOutcome === "" | gameOutcome === 'wrong') {
+        console.log(newMarker, gameOutcome);
+
+        if (newMarker === 'guess' && gameOutcome === 'win') {
+            setCardClass("correct-overlay"); 
+            setCardSymbol("\u2714"); 
+        }
+
+
+        else if (gameOutcome === "" | gameOutcome === 'wrong') {
 
             if (newMarker === 'dismiss'  && cardClass !== 'dismiss-overlay') {setCardClass("dismiss-overlay"); setCardSymbol("X")};
             if (newMarker === 'dismiss' && cardClass === 'dismiss-overlay') {setCardClass(""); setCardSymbol("")};
+            if (newMarker === 'guess'  && cardClass !== 'dismiss-overlay') {setCardClass("dismiss-overlay"); setCardSymbol("X")};
 
         }
 
-        if (newMarker === 'guess') {
-            setCardClass("correct-overlay"); 
-            setCardSymbol("\u2714"); 
-        };
+
     }
 
 

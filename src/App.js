@@ -34,9 +34,6 @@ function App() {
     setSecretPerson(() => gameService.randomGameCharacter());    
   }, [])
 
-  // TODO - intro white splash large logo, clear all cards on reset game(maybe if statement on card list so it will just rerender with blanks on newgame?)
-  // fix result render over animations(on help button and markertype change)
-  //- maybe if statement...only with if 2nd wuestion changes!
 
   function startNewGame() {
     console.log('start new game');
@@ -55,8 +52,6 @@ function App() {
     setGameOutcome("");
     setGameModal(false);
     setSecretPerson(() => gameService.randomGameCharacter()); 
-    setResetAllCards(false); 
-
   }
 
   // function resetAllCards() {
@@ -71,9 +66,9 @@ function App() {
     setPersonClicked(name)
     let secretName = secretPerson.name;
     let didChooseSecretPerson = name === secretName;
-    console.log(setPersonClicked);
-    console.log(secretName);
-    console.log(didChooseSecretPerson);
+    // console.log(setPersonClicked);
+    // console.log(secretName);
+    // console.log(didChooseSecretPerson);
 
     // opens win modal, no more guessing
     if (didChooseSecretPerson && activeMarker === "guess") {
@@ -120,11 +115,13 @@ function testBtn() {
 
 function dismissToggle() {
   setActiveMarker(() => "dismiss"); 
+  setResetAllCards(false);  // to allow markings in new game
   setActiveMarkerClass(["dismiss-button-active","guess-button"]);
 }
 
 function guessToggle() {
   setActiveMarker(() => "guess");   
+  setResetAllCards(false); // to allow markings in new game
   setActiveMarkerClass(["dismiss-button","guess-button-active"]);
 }
 
@@ -210,7 +207,7 @@ function submitQuestion($event) {
           </div>
         </div>
       </div>
-      {/* <button onClick={testBtn}>TEST</button> */}
+
       <div className='guesses-container'>
       {guesses.map((guess) => {
 
@@ -273,9 +270,9 @@ function submitQuestion($event) {
           <div>
             {/* <select className="custom-select" name="questions" id="questions" onChange={onSelectChange}> */}
             <select className="custom-select" name="questions" id="questions" onChange={event => updateQuestions(event)}>
-              <option disabled selected hidden  >Ask Topic...</option>
+              <option key={Math.random()} disabled value={"Ask Topic..."} hidden  >Ask Topic...</option>
               {questions.map(question => (
-                    <option value={question.primaryValue}>{question.primaryQuestion}</option>
+                    <option key={Math.random()} value={question.primaryValue}>{question.primaryQuestion}</option>
               ))}
 
             </select>
@@ -319,6 +316,7 @@ function submitQuestion($event) {
           </div>
         }
         {helperResponse && helperResponse.length < 32 &&  !guessTrigger &&
+        helpModal && !helpModal &&
           <div key={Math.random()} className='response response-yes'>
           {helperResponse}
           </div>
@@ -334,6 +332,18 @@ function submitQuestion($event) {
           </div>
         }
       </div>
+
+
+
+
+      <button onClick={testBtn}>TEST</button>
+
+
+
+
+
+
+
       <CardList characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} gameOutcome={gameOutcome} resetAllCards={resetAllCards} /> 
 
       {/* END GAME MODAL */}
