@@ -31,12 +31,11 @@ function App() {
   // assists with resetting random key generation to re-render for response fly animation if multiple wrong questions asked in a row
   // set secret character at beginning of game - useEffect is similar to ngOnInit
   useEffect(() => {
-    setSecretPerson(() => gameService.randomGameCharacter());    
+    setSecretPerson(() => gameService.randomGameCharacter());   
   }, [])
 
 
   function startNewGame() {
-    console.log('start new game');
     setResetAllCards(true);
     setSecretPerson("");
     setPersonClicked("");
@@ -60,6 +59,7 @@ function App() {
 
   function toggleHelpModal() {
     setHelpModal(!helpModal);
+    console.log(`The secret person is most definitely NOT ${secretPerson.name} - 😅`); 
   }
 
   function onCardClick(name) {
@@ -191,6 +191,41 @@ function submitQuestion($event) {
 
   return (
     <div className="App">
+
+
+      {/* SPLASH ONLY */}
+
+
+      <div className="splash-container">
+        <div className='splash-logo'>
+                <div className='title-group'>
+                  <div className='shift-lines'>
+                    <div className='line-1'>
+                      <div className='red-title-1'>Guess</div> 
+                      <div className='blue-title-1'>Guess</div>
+                    </div>
+                    <div className='line-2'>
+                      <div className='red-title-2'>Who</div> 
+                      <div className='blue-title-2'>Who</div>
+                    </div>
+                    <div className='line-3'>
+                      <div className='red-title-3'>?</div>
+                      <div className='blue-title-3'>?</div>
+                    </div>
+                  </div>
+                </div>
+
+
+        </div>
+      </div>
+
+    
+        {/* END SPLASH */}
+
+
+
+
+
       <div className='title-group'>
         <div className='shift-lines'>
           <div className='line-1'>
@@ -336,7 +371,7 @@ function submitQuestion($event) {
 
 
 
-      <button onClick={testBtn}>TEST</button>
+      {/* <button onClick={testBtn}>TEST</button> */}
 
 
 

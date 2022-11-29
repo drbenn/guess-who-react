@@ -8,7 +8,6 @@ const CardList = props => {
     const onCardClick = props.onCardClick;
     const gameOutcome = props.gameOutcome;
     const resetAllCards = props.resetAllCards;
-    console.log(gameOutcome);
    
     return (
         <div className='card-list'>
