@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.81ad54bd.css",
+    "main.js": "/static/js/main.44d69424.js",
+    "static/js/787.4264158c.chunk.js": "/static/js/787.4264158c.chunk.js",
+    "static/media/anita.png": "/static/media/anita.6fa25854ac83dc48c6bc.png",
+    "static/media/claire.png": "/static/media/claire.68631b621b3bb451da7c.png",
+    "static/media/eric.png": "/static/media/eric.2e00e96d3f7ec50e0cdc.png",
+    "static/media/joe.png": "/static/media/joe.ea4f4477b3e26f1e5efc.png",
+    "static/media/alex.png": "/static/media/alex.76b306c715da2d49f3e9.png",
+    "static/media/charles.png": "/static/media/charles.b1c765ad2c8c7dff6888.png",
+    "static/media/alfred.png": "/static/media/alfred.69656f4dd26fae21d40e.png",
+    "static/media/philip.png": "/static/media/philip.dbc3d448dbcbfc27615e.png",
+    "static/media/peter.png": "/static/media/peter.add3f31811b421b5f985.png",
+    "static/media/richard.png": "/static/media/richard.ae1897a0f46c08a95c0b.png",
+    "static/media/frans.png": "/static/media/frans.3364c997424a32d67bf8.png",
+    "static/media/david.png": "/static/media/david.a119ec437d032818cb77.png",
+    "static/media/sam.png": "/static/media/sam.81c5b39fcb27334ede1f.png",
+    "static/media/tom.png": "/static/media/tom.1adcb80ad3ce510c0b0b.png",
+    "static/media/george.png": "/static/media/george.418df44fbee75374de4f.png",
+    "static/media/paul.png": "/static/media/paul.c388fae4a22b31478f99.png",
+    "static/media/max.png": "/static/media/max.5d4f0c67f4ba5816c172.png",
+    "static/media/robert.png": "/static/media/robert.e33897b945274a9b58ea.png",
+    "static/media/bill.png": "/static/media/bill.baa206659713629031e5.png",
+    "static/media/maria.png": "/static/media/maria.6754e710e4b39b63c735.png",
+    "static/media/herman.png": "/static/media/herman.6d79de408ee1a0ffe836.png",
+    "static/media/susan.png": "/static/media/susan.4d58681c85de5b7fbbc2.png",
+    "static/media/anne.png": "/static/media/anne.110c7a90f80e1be7c99c.png",
+    "static/media/bernard.png": "/static/media/bernard.6c2680c4cc8a1942c160.png",
+    "index.html": "/index.html",
+    "main.81ad54bd.css.map": "/static/css/main.81ad54bd.css.map",
+    "main.44d69424.js.map": "/static/js/main.44d69424.js.map",
+    "787.4264158c.chunk.js.map": "/static/js/787.4264158c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.81ad54bd.css",
+    "static/js/main.44d69424.js"
+  ]
+}
