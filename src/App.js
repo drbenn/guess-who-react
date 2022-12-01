@@ -1,9 +1,13 @@
 import { useState, useEffect} from 'react';
 import './App.css';
+import Splash from './components/splash/splash.component';
+import Title from './components/title/title.component';
 import CardList from './components/card-list/card-list.component';
 import { characters } from './assets/data/characters';
 import { questions } from './assets/data/questions'
 import * as gameService from './services/game.service'
+import Scoreboard from './components/guess-scoreboard/guess-scoreboard.component';
+import MarkerButtonGroup from './components/marker-button-group/marker-button-group.component';
 
 
 
@@ -191,111 +195,15 @@ function submitQuestion($event) {
 
   return (
     <div className="App">
+      <Splash />
+      <Title />
+      <Scoreboard guesses={guesses} guessTrigger={guessTrigger} />
+
+      {/* AskOptions Refactor incomplete */}
+      {/* <AskOptions  questions={questions} secondaryQuestions={secondaryQuestions} updateQuestions={updateQuestions} submitQuestions={submitQuestion} activeMarkerClass={activeMarkerClass} dismissToggle={dismissToggle} guessToggle={guessToggle}/> */}
 
 
-      {/* SPLASH ONLY */}
-
-
-      <div className="splash-container">
-        <div className='splash-logo'>
-                <div className='title-group'>
-                  <div className='shift-lines'>
-                    <div className='line-1'>
-                      <div className='red-title-1'>Guess</div> 
-                      <div className='blue-title-1'>Guess</div>
-                    </div>
-                    <div className='line-2'>
-                      <div className='red-title-2'>Who</div> 
-                      <div className='blue-title-2'>Who</div>
-                    </div>
-                    <div className='line-3'>
-                      <div className='red-title-3'>?</div>
-                      <div className='blue-title-3'>?</div>
-                    </div>
-                  </div>
-                </div>
-
-
-        </div>
-      </div>
-
-    
-        {/* END SPLASH */}
-
-
-
-
-
-      <div className='title-group'>
-        <div className='shift-lines'>
-          <div className='line-1'>
-            <div className='red-title-1'>Guess</div> 
-            <div className='blue-title-1'>Guess</div>
-          </div>
-          <div className='line-2'>
-            <div className='red-title-2'>Who</div> 
-            <div className='blue-title-2'>Who</div>
-          </div>
-          <div className='line-3'>
-            <div className='red-title-3'>?</div>
-            <div className='blue-title-3'>?</div>
-          </div>
-        </div>
-      </div>
-
-      <div className='guesses-container'>
-      {guesses.map((guess) => {
-
-        // I need the last to NOT reanimate if !guessTrigger
-        // console.log(guess);
-          if (guess[0] === 0 ) {
-            return (
-              <div key={Math.random()} className='guess-box'></div>
-            )
-          }
-
-          // Animate Only if this is the newest response BUT NOT A RE-RENDER
-          if (guess[0] === 1 && guess[1] === true && guessTrigger) {
-            return (
-              <div key={Math.random()} className='guess-box response-yes'><div className='response-mark-delay'>&#10004;</div></div>
-            )
-          }
-          if (guess[0] === 2 && guess[1] === true && guessTrigger) {
-            return (
-              <div key={Math.random()} className='guess-box response-no'><div className='response-mark-delay'>X</div></div>
-            )
-          }
-
-        // No animation if newest response, but only switching questions - Activated for re-render, with no response = no need for animation
-        if (guess[0] === 1 && guess[1] === true && !guessTrigger) {
-          return (
-            <div key={Math.random()} className='guess-box response-yes'><div>&#10004;</div></div>
-          )
-        }
-        if (guess[0] === 2 && guess[1] === true && !guessTrigger) {
-          return (
-            <div key={Math.random()} className='guess-box response-no'><div>X</div></div>
-          )
-        }
-
-          // Re-renders without animation if previous response
-          if (guess[0] === 1 && guess[1] === false) {
-            return (
-              <div key={Math.random()} className='guess-box response-yes'><div className=''>&#10004;</div></div>
-            )
-          }
-          if (guess[0] === 2 && guess[1] === false) {
-            return (
-              <div key={Math.random()} className='guess-box response-no'><div className=''>X</div></div>
-            )
-          }
-            return null
-          })}
-      </div>
-
-
-
-      {/* {console.log(questions)} */}
+    {/* REFACTOR BEGIN SECTION */}
       <div className='wrap-flex'>
        <div className='select-flex'>
           {/* <div className='ask-text'>
@@ -336,14 +244,13 @@ function submitQuestion($event) {
           }
 
 
-              <div className='active-marker-container'>
-                <div className={activeMarkerClass[0]} onClick={dismissToggle}>Dismiss</div>
-                <div className={activeMarkerClass[1]} onClick={guessToggle}>Guess</div>
-              </div>
+          <MarkerButtonGroup activeMarkerClass={activeMarkerClass} dismissToggle={dismissToggle} guessToggle={guessToggle} />
           </div>
 
 
       </div>
+
+      {/* REFACTOR END SECTION */}
       <div>
         {helperResponse && helperResponse.length < 32 &&  guessTrigger &&
           <div key={Math.random()} className='response response-yes response-fly-animation'>

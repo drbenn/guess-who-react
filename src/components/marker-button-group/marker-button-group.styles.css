@@ -1,0 +1,80 @@
+.active-marker-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-self: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background-color: white;
+  border-radius: 1.2rem;
+  margin: 0.5rem;
+  border-radius: 2rem;
+  border: 0.4rem solid var(--g-yellow);
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+
+.dismiss-button {
+  padding: 0 1rem;
+  border-left:  0.1rem solid rgb(176, 176, 176);
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  padding: 0.4rem 0.6rem 0.6rem 0.8rem;
+  color: var(--g-blue);
+  text-shadow: 1px 1px 2px rgb(63, 63, 63);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  transition: all 0.2s ease-in;
+}
+
+
+.dismiss-button-active {
+  background-color: rgb(218, 218, 218);
+  padding: 0 1rem;
+  border-left:  0.1rem solid rgb(176, 176, 176);
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  padding: 0.4rem 0.6rem 0.6rem 0.8rem;
+  background-color: var(--g-blue);
+  color: white;
+  text-shadow: 1px 1px 2px rgb(63, 63, 63);
+  box-shadow: rgba(0, 0, 0, 0.137) 0px -50px 36px -28px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  transition: all 0.2s ease-in;
+}
+
+
+.guess-button {
+  padding: 0 1rem;
+  border-left:  0.1rem solid rgb(176, 176, 176);
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  padding: 0.4rem 1.2rem 0.6rem 0.6rem;
+  color: var(--g-blue);
+  text-shadow: 1px 1px 2px rgb(63, 63, 63);
+  transition: .2s ease-in;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  transition: all 0.2s ease-in;
+}
+
+
+.guess-button-active {
+  background-color: rgb(218, 218, 218);
+  padding: 0 1rem;
+  border-left:  0.1rem solid rgb(176, 176, 176);
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  padding: 0.4rem 1.2rem 0.6rem 0.6rem;
+  background-color: var(--g-blue);
+  color: white;
+  text-shadow: 1px 1px 2px rgb(63, 63, 63);
+  transition: .2s ease-in;
+  box-shadow: rgba(0, 0, 0, 0.137) 0px -50px 36px -28px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  transition: all 0.2s ease-in;
+}
+
+
+.dismiss-button:hover, .guess-button:hover {
+  background-color: rgb(236, 236, 236);
+  transition: .2s ease-in;
+}
