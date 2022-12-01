@@ -406,7 +406,7 @@ select::-ms-expand {
 
 /* END GAME MODAL */
 
-.end-game-modal {
+/* .end-game-modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -441,8 +441,6 @@ select::-ms-expand {
 
 .close-button:hover {
   background-color: var(--g-red);
-  /* transform: scale(1.05);
-  padding: 0.03rem 0.5rem 0.2rem 0.5rem; */
   transition: all 0.2s;
 }
 
@@ -476,7 +474,6 @@ select::-ms-expand {
   width: 80%;
   position: relative;
   z-index:2;
-  /* text-shadow: 0px 0px 1px rgb(89, 89, 89); */
   background-color: rgba(255, 255, 255, 0.564);
 }
 
@@ -570,7 +567,7 @@ a:hover {
   color: var(--g-yellow);
   transition: all 0.3s ease-in-out;
   text-decoration: none;
-}
+} */
 
 .wrap-flex {
   display: flex;
