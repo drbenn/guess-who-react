@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/guess-who-react/static/css/main.81ad54bd.css",
-    "main.js": "/guess-who-react/static/js/main.7d4c0d4a.js",
+    "main.css": "/guess-who-react/static/css/main.4e894288.css",
+    "main.js": "/guess-who-react/static/js/main.6e147dcd.js",
     "static/js/787.4264158c.chunk.js": "/guess-who-react/static/js/787.4264158c.chunk.js",
     "static/media/anita.png": "/guess-who-react/static/media/anita.6fa25854ac83dc48c6bc.png",
     "static/media/claire.png": "/guess-who-react/static/media/claire.68631b621b3bb451da7c.png",
@@ -28,12 +28,12 @@
     "static/media/anne.png": "/guess-who-react/static/media/anne.110c7a90f80e1be7c99c.png",
     "static/media/bernard.png": "/guess-who-react/static/media/bernard.6c2680c4cc8a1942c160.png",
     "index.html": "/guess-who-react/index.html",
-    "main.81ad54bd.css.map": "/guess-who-react/static/css/main.81ad54bd.css.map",
-    "main.7d4c0d4a.js.map": "/guess-who-react/static/js/main.7d4c0d4a.js.map",
+    "main.4e894288.css.map": "/guess-who-react/static/css/main.4e894288.css.map",
+    "main.6e147dcd.js.map": "/guess-who-react/static/js/main.6e147dcd.js.map",
     "787.4264158c.chunk.js.map": "/guess-who-react/static/js/787.4264158c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.81ad54bd.css",
-    "static/js/main.7d4c0d4a.js"
+    "static/css/main.4e894288.css",
+    "static/js/main.6e147dcd.js"
   ]
 }
