@@ -3,6 +3,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
+  width: fit-content;
   align-self: center;
   font-size: 1.5rem;
   font-weight: 600;

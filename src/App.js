@@ -208,12 +208,7 @@ function submitQuestion($event) {
     {/* REFACTOR BEGIN SECTION */}
       <div className='wrap-flex'>
        <div className='select-flex'>
-          {/* <div className='ask-text'>
-            Ask:
-          </div> */}
-
           <div>
-            {/* <select className="custom-select" name="questions" id="questions" onChange={onSelectChange}> */}
             <select className="custom-select" name="questions" id="questions" onChange={event => updateQuestions(event)}>
               <option key={Math.random()} disabled value={"Ask Topic..."} hidden  >Ask Topic...</option>
               {questions.map(question => (
@@ -246,7 +241,11 @@ function submitQuestion($event) {
           }
 
 
-          <MarkerButtonGroup activeMarkerClass={activeMarkerClass} dismissToggle={dismissToggle} guessToggle={guessToggle} />
+          <MarkerButtonGroup 
+            activeMarkerClass={activeMarkerClass} dismissToggle={dismissToggle} 
+            guessToggle={guessToggle} 
+          />
+          
           </div>
 
 
@@ -254,15 +253,24 @@ function submitQuestion($event) {
 
       {/* REFACTOR END SECTION */}
 
-        <HelperMessage helperResponse={helperResponse} guessTrigger={guessTrigger} helpModal={helpModal}/>
+        <HelperMessage 
+          helperResponse={helperResponse} guessTrigger={guessTrigger} helpModal={helpModal}
+        />
 
 
 
       {/* <button onClick={testBtn}>TEST</button> */}
 
-      <CardList characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} gameOutcome={gameOutcome} resetAllCards={resetAllCards} /> 
+      <CardList 
+        characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} 
+        gameOutcome={gameOutcome} resetAllCards={resetAllCards} 
+      /> 
 
-      <Modals gameModal={gameModal} gameOutcome={gameOutcome} secretPerson={secretPerson} startNewGame={startNewGame} personClicked={personClicked} closeModal={closeModal} helpModal={helpModal} toggleHelpModal={toggleHelpModal}/>
+      <Modals 
+        gameModal={gameModal} gameOutcome={gameOutcome} secretPerson={secretPerson} 
+        startNewGame={startNewGame} personClicked={personClicked} closeModal={closeModal} 
+        helpModal={helpModal} toggleHelpModal={toggleHelpModal}
+      />
 
 
     </div>
