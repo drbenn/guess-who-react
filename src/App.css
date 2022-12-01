@@ -332,9 +332,7 @@ select::-ms-expand {
 
 /* RESPONSE */
 
-.response {
-
-  /* border: 1px solid red; */
+/* .response {
   width: 100%;
   font-size: calc(1.5rem + 0.8vw);
   font-weight: 800;
@@ -342,7 +340,7 @@ select::-ms-expand {
   margin: 1rem;
   -webkit-text-stroke: 1px var(--g-response);
   text-shadow: -1px -1px 2px var(--g-response);
-}
+} */
 
 /* .response-yes {
  color: var(--g-check-green);
@@ -354,7 +352,7 @@ select::-ms-expand {
   text-shadow: 1px 1px 2px rgb(63, 63, 63);
 } */
 
-.response-fly-animation {
+/* .response-fly-animation {
   animation: responseFly 0.8s ease-in;
 }
 
@@ -367,7 +365,7 @@ select::-ms-expand {
   100% {
     transform: scale(1);
   }
-}
+} */
 
 /* @keyframes responseFly {
   0% {

@@ -9,6 +9,7 @@ import * as gameService from './services/game.service'
 import Scoreboard from './components/guess-scoreboard/guess-scoreboard.component';
 import MarkerButtonGroup from './components/marker-button-group/marker-button-group.component';
 import Modals from './components/modals/modals.component';
+import HelperMessage from './components/helper-message/helper-message.component';
 
 
 
@@ -252,44 +253,18 @@ function submitQuestion($event) {
       </div>
 
       {/* REFACTOR END SECTION */}
-      <div>
-        {helperResponse && helperResponse.length < 32 &&  guessTrigger &&
-          <div key={Math.random()} className='response response-yes response-fly-animation'>
-          {helperResponse}
-          </div>
-        }
-        {helperResponse && helperResponse.length < 32 &&  !guessTrigger &&
-        helpModal && !helpModal &&
-          <div key={Math.random()} className='response response-yes'>
-          {helperResponse}
-          </div>
-        }
-        {helperResponse && helperResponse.length > 32  && guessTrigger &&
-          <div key={Math.random()} className='response response-no response-fly-animation'>
-          {helperResponse}
-          </div>
-        }
-        {helperResponse && helperResponse.length > 32  && !guessTrigger &&
-          <div key={Math.random()} className='response response-no'>
-          {helperResponse}
-          </div>
-        }
-      </div>
 
+        <HelperMessage helperResponse={helperResponse} guessTrigger={guessTrigger} helpModal={helpModal}/>
 
 
 
       {/* <button onClick={testBtn}>TEST</button> */}
 
-
-
-
-
-
-
       <CardList characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} gameOutcome={gameOutcome} resetAllCards={resetAllCards} /> 
 
-        <Modals gameModal={gameModal} gameOutcome={gameOutcome} secretPerson={secretPerson} startNewGame={startNewGame} personClicked={personClicked} closeModal={closeModal} helpModal={helpModal} toggleHelpModal={toggleHelpModal}/>
+      <Modals gameModal={gameModal} gameOutcome={gameOutcome} secretPerson={secretPerson} startNewGame={startNewGame} personClicked={personClicked} closeModal={closeModal} helpModal={helpModal} toggleHelpModal={toggleHelpModal}/>
+
+
     </div>
   );
 }
