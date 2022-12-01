@@ -32,7 +32,7 @@ function App() {
   const [gameModal, setGameModal] = useState(false);
   const [helpModal, setHelpModal] = useState(false);
   const [resetAllCards, setResetAllCards] = useState(false);
-  
+
 
   // assists with resetting random key generation to re-render for response fly animation if multiple wrong questions asked in a row
   // set secret character at beginning of game - useEffect is similar to ngOnInit
@@ -59,10 +59,6 @@ function App() {
     setSecretPerson(() => gameService.randomGameCharacter()); 
   }
 
-  // function resetAllCards() {
-  //   console.log('resetcards');
-  // }
-
   function toggleHelpModal() {
     setHelpModal(!helpModal);
     console.log(`The secret person is most definitely NOT ${secretPerson.name} - 😅`); 
@@ -72,9 +68,6 @@ function App() {
     setPersonClicked(name)
     let secretName = secretPerson.name;
     let didChooseSecretPerson = name === secretName;
-    // console.log(setPersonClicked);
-    // console.log(secretName);
-    // console.log(didChooseSecretPerson);
 
     // opens win modal, no more guessing
     if (didChooseSecretPerson && activeMarker === "guess") {
@@ -106,18 +99,18 @@ function App() {
     setHelpModal(false);
   }
 
-function testBtn() {
-  console.log('%cCurrent State', `color: goldenrod; background: #3d09bf; font-size:1.2rem; font-family: Helvetica; 
-                                  font-weight: bolder; border: 2px solid #1cce69; border-radius: 5px; padding:0.5rem;
-                                  margin: 1rem; width: 40rem`);
-    console.log('Secret Person: ', secretPerson);
-    console.log('ActiveMarker: ', activeMarker);
-    console.log('PrimaryQuestion: ', primaryQuestion);
-    console.log('SecondaryQuestions: ', secondaryQuestions);
-    console.log('Guesses: ', guesses);
-    console.log('GuessTrigger: ', guessTrigger);
-    console.log('PersonClicked: ', personClicked );
-}
+// function testBtn() {
+//   console.log('%cCurrent State', `color: goldenrod; background: #3d09bf; font-size:1.2rem; font-family: Helvetica; 
+//                                   font-weight: bolder; border: 2px solid #1cce69; border-radius: 5px; padding:0.5rem;
+//                                   margin: 1rem; width: 40rem`);
+//     console.log('Secret Person: ', secretPerson);
+//     console.log('ActiveMarker: ', activeMarker);
+//     console.log('PrimaryQuestion: ', primaryQuestion);
+//     console.log('SecondaryQuestions: ', secondaryQuestions);
+//     console.log('Guesses: ', guesses);
+//     console.log('GuessTrigger: ', guessTrigger);
+//     console.log('PersonClicked: ', personClicked );
+// }
 
 function dismissToggle() {
   setActiveMarker(() => "dismiss"); 
@@ -133,6 +126,8 @@ function guessToggle() {
 
 function updateQuestions($event) {
   setGuessTrigger(false)
+
+
   let primaryQuestion = $event.target.value
   setPrimaryQuestion(() => primaryQuestion)
 
@@ -184,7 +179,6 @@ function submitQuestion($event) {
     setCurrentGuess((currentGuess) => currentGuess + 1)
 
     // GAME OVER - TOO MANY GUESSES AND RAN OUT OF ATTEMPTS
-    console.log(currentGuess);
     if (currentGuess === 4) {
       setGameOutcome("guessed-out")
       setGameModal(true);
@@ -210,7 +204,7 @@ function submitQuestion($event) {
        <div className='select-flex'>
           <div>
             <select className="custom-select" name="questions" id="questions" onChange={event => updateQuestions(event)}>
-              <option key={Math.random()} disabled value={"Ask Topic..."} hidden  >Ask Topic...</option>
+              <option key={Math.random()} disabled selected hidden  >Ask Topic...</option>
               {questions.map(question => (
                     <option key={Math.random()} value={question.primaryValue}>{question.primaryQuestion}</option>
               ))}
