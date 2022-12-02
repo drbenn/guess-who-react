@@ -2,12 +2,7 @@
 import Card from '../card/card.component';
 import './card-list.styles.css';
 
-const CardList = props => {
-    const characters = props.characters;
-    const activeMarker = props.activeMarker;
-    const onCardClick = props.onCardClick;
-    const gameOutcome = props.gameOutcome;
-    const resetAllCards = props.resetAllCards;
+const CardList = ({characters, activeMarker, secretPerson, onCardClick, resetAllCards}) => {
    
     return (
         <div className='card-list'>
@@ -15,7 +10,7 @@ const CardList = props => {
                 return (
                     <Card 
                     key={character.id} character={character} activeMarker={activeMarker} 
-                    onCardClick={onCardClick} gameOutcome={gameOutcome} resetAllCards={resetAllCards}
+                    onCardClick={onCardClick} secretPerson={secretPerson} resetAllCards={resetAllCards}
                     />
                 )
             })}

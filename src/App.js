@@ -257,7 +257,7 @@ function submitQuestion($event) {
 
       <CardList 
         characters={characters} activeMarker={activeMarker} onCardClick={onCardClick} 
-        gameOutcome={gameOutcome} resetAllCards={resetAllCards} 
+        secretPerson={secretPerson} resetAllCards={resetAllCards} 
       /> 
 
       <Modals 
