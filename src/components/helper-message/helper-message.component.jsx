@@ -14,12 +14,12 @@ const HelperMessage = ({helperResponse, guessTrigger, helpModal}) => {
       {helperResponse}
       </div>
     }
-    {helperResponse && helperResponse.length > 32  && guessTrigger &&
+    {helperResponse && helperResponse.length > 32  && !guessTrigger &&
       <div key={Math.random()} className='response response-no response-fly-animation'>
       {helperResponse}
       </div>
     }
-    {helperResponse && helperResponse.length > 32  && !guessTrigger &&
+    {helperResponse && helperResponse.length > 32  && guessTrigger &&
       <div key={Math.random()} className='response response-no'>
       {helperResponse}
       </div>
