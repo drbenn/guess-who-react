@@ -1,13 +1,10 @@
 import { useState } from 'react';
 
-const Card = ({character, newMarker, gameOutcome, resetAllCards}) => {
+const Card = ({character, activeMarker, onCardClick, gameOutcome, resetAllCards}) => {
     const [cardSymbol, setCardSymbol] = useState("");
     const [cardClass, setCardClass] = useState("");
-    // const character = props.character;
-    // const newMarker = props.activeMarker;
-    // const gameOutcome = props.gameOutcome;
-    // const resetAllCards = props.resetAllCards;
     const {id,name,img} = character
+
 
     // Clears card marks on gamereset
     if (resetAllCards && cardClass !== "") {
@@ -17,17 +14,18 @@ const Card = ({character, newMarker, gameOutcome, resetAllCards}) => {
 
 
     let cardClick = () => {
-        console.log(newMarker, gameOutcome);
+        onCardClick(name);
+        console.log(activeMarker, gameOutcome);
 
-        if (newMarker === 'guess' && gameOutcome === 'win') {
+        if (activeMarker === 'guess' && gameOutcome === 'win') {
             setCardClass("correct-overlay"); 
             setCardSymbol("\u2714"); 
         }
         else if (gameOutcome === "" | gameOutcome === 'wrong') {
 
-            if (newMarker === 'dismiss'  && cardClass !== 'dismiss-overlay') {setCardClass("dismiss-overlay"); setCardSymbol("X")};
-            if (newMarker === 'dismiss' && cardClass === 'dismiss-overlay') {setCardClass(""); setCardSymbol("")};
-            if (newMarker === 'guess'  && cardClass !== 'dismiss-overlay') {setCardClass("dismiss-overlay"); setCardSymbol("X")};
+            if (activeMarker === 'dismiss'  && cardClass !== 'dismiss-overlay') {setCardClass("dismiss-overlay"); setCardSymbol("X")};
+            if (activeMarker === 'dismiss' && cardClass === 'dismiss-overlay') {setCardClass(""); setCardSymbol("")};
+            if (activeMarker === 'guess'  && cardClass !== 'dismiss-overlay') {setCardClass("dismiss-overlay"); setCardSymbol("X")};
         }
     }
 
