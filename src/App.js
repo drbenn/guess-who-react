@@ -10,9 +10,10 @@ import Scoreboard from './components/guess-scoreboard/guess-scoreboard.component
 import MarkerButtonGroup from './components/marker-button-group/marker-button-group.component';
 import Modals from './components/modals/modals.component';
 import HelperMessage from './components/helper-message/helper-message.component';
+import AskOptions from './components/ask-options/ask-options.component';
 
 
-
+// https://stackoverflow.com/questions/35537229/how-can-i-update-the-parents-state-in-react
 
 function App() {
 
@@ -195,12 +196,13 @@ function submitQuestion($event) {
       <Title />
       <Scoreboard guesses={guesses} guessTrigger={guessTrigger} />
 
+      <AskOptions questions={questions} secondaryQuestions={secondaryQuestions} updateQuestions={updateQuestions} submitQuestion={submitQuestion} activeMarkerClass={activeMarkerClass} dismissToggle={dismissToggle} guessToggle={guessToggle} />
       {/* AskOptions Refactor incomplete */}
       {/* <AskOptions  questions={questions} secondaryQuestions={secondaryQuestions} updateQuestions={updateQuestions} submitQuestions={submitQuestion} activeMarkerClass={activeMarkerClass} dismissToggle={dismissToggle} guessToggle={guessToggle}/> */}
 
 
     {/* REFACTOR BEGIN SECTION */}
-      <div className='wrap-flex'>
+      {/* <div className='wrap-flex'>
        <div className='select-flex'>
           <div>
             <select className="custom-select" name="questions" id="questions" onChange={event => updateQuestions(event)}>
@@ -243,7 +245,7 @@ function submitQuestion($event) {
           </div>
 
 
-      </div>
+      </div> */}
 
       {/* REFACTOR END SECTION */}
 

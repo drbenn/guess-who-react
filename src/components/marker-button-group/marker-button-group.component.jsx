@@ -2,6 +2,9 @@ import './marker-button-group.styles.css';
 
 const MarkerButtonGroup = ({activeMarkerClass, dismissToggle, guessToggle }) => {
 
+  console.log(activeMarkerClass);
+  console.log(dismissToggle);
+  console.log(guessToggle);
   return (
 
   <div className='active-marker-container'>
