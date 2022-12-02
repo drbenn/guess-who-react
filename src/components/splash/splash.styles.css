@@ -2,13 +2,16 @@
 .splash-container {
   position: absolute;
   z-index:-1;
-  height: 0vh;
+  height: 0%;
   width: 0vw;
   /* background-color: white; */
   display: flex;
   justify-content: center;
   align-items: flex-start;
   animation: splash-anim 3s ease-out;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll; 
 
 }
 
@@ -20,28 +23,35 @@
 @keyframes splash-anim {
   0% {
     z-index:1000;
-    height: 150vh;
+    height: 100%;
     width: 100vw;
     background-color: white;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
     
   }
 
   90% {
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     background-color: white;
   }
 
   99% {
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     /* background-color: white; */
+
   }
 
   100% {
-    height: 0vh;
+    height: 0%;
     width: 0vw;
     background-color: transparent;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
   }
   
 }
@@ -49,19 +59,33 @@
 @keyframes splash-logo {
   0% {
     margin-top: 20rem ;
-    
+    transform: translateX(0.7rem);
   }
 
-  60% {
+  50% {
     margin-top: 20rem ;
+    filter: brightness(100%) hue-rotate(0deg);
+  }
+
+
+  60% {
+
+
+  }
+
+  85% {
+    margin-top: 0rem ;
+    filter: brightness(100%) hue-rotate(0deg);
   }
 
   90% {
-    margin-top: 0rem ;
+    filter: brightness(125%) hue-rotate(-10deg);
   }
 
   100% {
     margin-top: 0rem ;
+    transform: translateX(0.7rem);
+    filter: brightness(100%) hue-rotate(0deg);
   }
   
 }
