@@ -141,6 +141,7 @@ function submitQuestion($event) {
   let secondQuestionValue = $event.target.value
   let guess = secondQuestionValue;
   if (guess !== "Pick One..." &&  gameOutcome !== "win" && gameOutcome !== "lose") {
+    // TODO secretAttribute not found ? "Uncaught TypeError: Cannot read properties of undefined (reading 'noseSize')"
     let secretAttribute = secretPerson[primaryQuestion]
     let isGuessCorrect = secretAttribute === guess;
  
@@ -198,7 +199,7 @@ function submitQuestion($event) {
       />
 
       <HelperMessage 
-        helperResponse={helperResponse} guessTrigger={guessTrigger} helpModal={helpModal} 
+        helperResponse={helperResponse} guessTrigger={guessTrigger} currentGuess={currentGuess} 
       />
 
       {/* <button onClick={testBtn}>TEST</button> */}
